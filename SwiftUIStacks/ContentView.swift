@@ -9,74 +9,58 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            HeaderView()
+        VStack() {
             
-            HStack(spacing: 10) {
+            Text("Choose Your Plan")
+                .font(.system(.largeTitle, design: .rounded))
+                .fontWeight(.black)
+
+            Spacer()
+
+            ZStack {
                 PricingView(
+                    icon: "leaf",
                     title: "Basic",
                     price: 9.99,
                     textColor: Color.white,
                     backgroundColor: Color.purple
                 )
 
-                ZStack {
-                    PricingView(
-                        title: "Pro",
-                        price: 19.99,
-                        textColor: Color.black,
-                        backgroundColor: Color(
-                            red: 240/255,
-                            green: 240/255,
-                            blue: 240/255
-                        )
-                    )
-                    
-                    PlanLabelView(text: "Best for designer", offsetY: 90)
-                }
-            }
-            .padding(.horizontal)
-
-            ZStack {
                 PricingView(
-                    icon: "wand.and.rays",
+                    icon: "flame",
+                    title: "Pro",
+                    price: 19.99,
+                    textColor: Color.white,
+                    backgroundColor: Color(
+                        red: 255/255,
+                        green: 183/255,
+                        blue: 37/255
+                    )
+                )
+                .scaleEffect(0.95)
+                .offset(x: 0, y: -185)
+
+                PricingView(
+                    icon: "bolt",
                     title: "Team",
                     price: 299,
                     textColor: Color.white,
                     backgroundColor: Color(red: 62/255, green: 63/255, blue: 70/255)
                 )
-                
-                PlanLabelView(text: "Best for teams with 20 members", offsetY: 107.75)
+                .scaleEffect(0.9)
+                .offset(x: 0, y: -360)
+
             }
-            .padding(.horizontal)
-            
-            Spacer()
         }
+        .padding()
         
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-struct HeaderView: View {
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Choose")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
-                Text("Your Plan")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .fontWeight(.black)
-            }
-            
-            Spacer()
-        }
-        .padding(.horizontal)
     }
 }
 
