@@ -39,20 +39,20 @@ struct ContentView: View {
 
             ZStack {
                 PricingView(
-                    icon: PlanIcon(
-                        iconName: "wand.and.rays",
-                        iconColor: Color.white
-                    ),
+                    icon: "wand.and.rays",
                     title: "Team",
                     price: 299,
                     textColor: Color.white,
-                    backgroundColor: Color.black
+                    backgroundColor: Color(red: 62/255, green: 63/255, blue: 70/255)
                 )
                 
                 PlanLabelView(text: "Best for teams with 20 members", offsetY: 107.75)
             }
             .padding(.horizontal)
+            
+            Spacer()
         }
+        
     }
 }
 
@@ -64,25 +64,25 @@ struct ContentView_Previews: PreviewProvider {
 
 struct HeaderView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text("Choose")
-                .font(.system(.largeTitle, design: .rounded))
-                .fontWeight(.black)
-            Text("Your Plan")
-                .font(.system(.largeTitle, design: .rounded))
-                .fontWeight(.black)
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Choose")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.black)
+                Text("Your Plan")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.black)
+            }
+            
+            Spacer()
         }
+        .padding(.horizontal)
     }
-}
-
-struct PlanIcon {
-    var iconName: String
-    var iconColor: Color
 }
 
 struct PricingView: View {
     
-    var icon: PlanIcon?
+    var icon: String?
     var title: String
     var price: Double
     var textColor: Color
@@ -102,11 +102,12 @@ struct PricingView: View {
     
     var body: some View {
         VStack {
-            if let icon = icon {
-                Image(systemName: icon.iconName)
+            icon.map({
+                Image(systemName: $0)
                     .font(.largeTitle)
-                    .foregroundColor(icon.iconColor)
-            }
+                    .foregroundColor(textColor)
+            })
+            
             Text(title)
                 .font(.system(.title, design: .rounded))
                 .fontWeight(.black)
